@@ -6,7 +6,7 @@ import org.eclipse.paho.client.mqttv3.{MqttMessage, MqttConnectOptions, MqttClie
 object MqttPublisher {
   def main(args: Array[String]) {
     // Connect Target
-    val brokerURI:String = "ssl://A3869B885YB2CX.iot.ap-northeast-1.amazonaws.com:8883"
+    val brokerURI:String = "ssl://******.iot.ap-northeast-1.amazonaws.com:8883"
 
     // SocketFactoryGenerate
     val socketFactory = SocketFactoryGenerator.generateFromFilePath("/etc/cert/rootCA.pem", "/etc/cert/cert.pem", "/etc/cert/private.pem", "password")
