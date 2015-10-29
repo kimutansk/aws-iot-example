@@ -22,7 +22,7 @@ object SocketFactoryGenerator {
    * @param keyFilePath Private key file path
    * @return Generated [[javax.net.ssl.SSLSocketFactory]]
    */
-  def generateFromFilePath(rootCaFilePath:String, certFilePath:String, keyFilePath:String, keyStorePassword:String):SSLSocketFactory = {
+  def generateFromFilePath(rootCaFilePath:String, certFilePath:String, keyFilePath:String):SSLSocketFactory = {
     Security.addProvider(new BouncyCastleProvider())
 
     // load Root CA certificate
@@ -54,9 +54,9 @@ object SocketFactoryGenerator {
     val ks:KeyStore  = KeyStore.getInstance(KeyStore.getDefaultType())
     ks.load(null, null)
     ks.setCertificateEntry("certificate", serverCert)
-    ks.setKeyEntry("private-key", keyPair.getPrivate(), keyStorePassword.toCharArray, Array(serverCert))
+    ks.setKeyEntry("private-key", keyPair.getPrivate(), "DummyPassword".toCharArray, Array(serverCert))
     val kmf:KeyManagerFactory = KeyManagerFactory.getInstance(KeyManagerFactory.getDefaultAlgorithm())
-    kmf.init(ks, keyStorePassword.toCharArray());
+    kmf.init(ks, "DummyPassword".toCharArray());
 
     // finally, create SSL socket factory
     val context:SSLContext = SSLContext.getInstance("TLSv1.2")
